@@ -8,21 +8,40 @@
 
   <table class="w-full border">
     <thead>
-      <tr class="bg-gray-200">
+      <tr class="bg-black">
         <th class="py-2 px-4 border">ID</th>
         <th class="py-2 px-4 border">Nombre</th>
+        <th class="py-2 px-4 border">Apellido</th>
         <th class="py-2 px-4 border">Email</th>
+        <th class="py-2 px-4 border">Teléfono</th>
         <th class="py-2 px-4 border">Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of users" class="border-t">
-        <td class="py-2 px-4">{{ user.id }}</td>
-        <td class="py-2 px-4">{{ user.name }}</td>
-        <td class="py-2 px-4">{{ user.email }}</td>
-        <td class="py-2 px-4">
+        <td class="py-2 px-4 border-1">{{ user.id }}</td>
+        <td class="py-2 px-4 border-1">{{ user.name }}</td>
+        <td class="py-2 px-4 border-1">{{ user.last_name }}</td>
+        <td class="py-2 px-4 border-1">{{ user.email }}</td>
+        <td class="py-2 px-4 border-1">{{ user.tel }}</td>
+
+        <td class="py-2 px-6 justify-between flex items-center">
+          <div id="openModal" class="bg-red-600/80 p-1 rounded-full text-black cursor-pointer hover:scale-110 duration-300 ease-in-out">
+            <app-delete-icon (click)="openModal(user)"></app-delete-icon>
+          </div>
+          <app-edit-icon class="bg-blue-400 p-1 text-black/90 rounded-full cursor-pointer hover:scale-110 duration-300 ease-in-out"></app-edit-icon>
         </td>
       </tr>
     </tbody>
   </table>
+
 </div>
+<dialog id="modal" class="bg-gray-400 px-6 py-6 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <h2 class="text-xl font-bold mb-4">Confirmar Eliminación</h2>
+    <p>¿Estás seguro de que deseas eliminar este usuario?</p>
+    <div class="mt-4 flex justify-center flex-nowrap">
+        <button type="button" class="bg-gray-300 px-4 py-2 cursor-pointer rounded mr-2 hover:scale-110 duration-300 ease-in-out" (click)="closeModal()">Cancelar</button>
+      <button id="deleteButton" type="button" class="bg-red-600 text-white px-4 py-2 cursor-pointer rounded hover:scale-110 duration-300 ease-in-out"
+        (click)="confirmDelete()">Eliminar</button>
+    </div>
+</dialog>
