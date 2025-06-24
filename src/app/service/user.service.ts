@@ -16,15 +16,15 @@ export class UserService {
     }
 
     createUser(user: User): Observable<User> {
-        return this.http.post<User>(this.API_URL, user);
+        return this.http.post<User>(`${this.API_URL}/create`, user);
     }
 
     updateUser(id: number, user: User): Observable<User> {
-        return this.http.put<User>(`${this.API_URL}/${id}`, user);
+        return this.http.put<User>(`${this.API_URL}/update/${id}`, user);
     }
 
     deleteUser(id: number): Observable<void> {
-        return this.http.delete<void>(`${this.API_URL}/${id}`);
+        return this.http.delete<void>(`${this.API_URL}/delete/${id}`);
     }
 
 }

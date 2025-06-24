@@ -1,7 +1,7 @@
-<div class="max-w-3xl mx-auto mt-10">
+<div class="max-w-3xl mx-auto my-10">
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-2xl font-bold">Lista de Usuarios</h1>
-    <a (click)="goToForm()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+    <a (click)="goToForm()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer hover:scale-115 duration-300">
       Agregar Usuario
     </a>
   </div>
@@ -29,7 +29,7 @@
           <div id="openModal" class="bg-red-600/80 p-1 rounded-full text-black cursor-pointer hover:scale-110 duration-300 ease-in-out">
             <app-delete-icon (click)="openModal(user)"></app-delete-icon>
           </div>
-          <app-edit-icon class="bg-blue-400 p-1 text-black/90 rounded-full cursor-pointer hover:scale-110 duration-300 ease-in-out"></app-edit-icon>
+          <app-edit-icon (click)="openUpdateModal(user)" class="bg-blue-400 p-1 text-black/90 rounded-full cursor-pointer hover:scale-110 duration-300 ease-in-out"></app-edit-icon>
         </td>
       </tr>
     </tbody>
@@ -44,4 +44,32 @@
       <button id="deleteButton" type="button" class="bg-red-600 text-white px-4 py-2 cursor-pointer rounded hover:scale-110 duration-300 ease-in-out"
         (click)="confirmDelete()">Eliminar</button>
     </div>
+</dialog>
+
+<dialog id="updateModal" class="bg-gray-400 px-6 py-6 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <h2 class="text-xl font-bold mb-4 text-center w-full">Confirmar Actualización</h2>
+    <p>¿Estás seguro de que deseas actualizar este usuario?</p>
+    <div class="mt-4 flex justify-center flex-nowrap">
+      <form action="post" method="post" class="flex flex-col gap-2 w-full">
+                    
+          <label class="flex flex-col">Nombre
+                <input [(ngModel)]="userToUpdate.name" name="name" class="border-2 border-black rounded-lg py-0.5" type="text" required>
+            </label>
+
+            <label class="flex flex-col">Apellidos
+                <input [(ngModel)]="userToUpdate.last_name" name="last_name" class="border-2 border-black rounded-lg py-0.5" type="text">
+            </label>
+
+            <label class="flex flex-col">Email
+                <input [(ngModel)]="userToUpdate.email" name="email" class="border-2 border-black rounded-lg py-0.5" type="email">
+            </label>
+
+            <label class="flex flex-col">Teléfono
+                <input [(ngModel)]="userToUpdate.tel" name="tel" class="border-2 border-black rounded-lg py-0.5 mb-4" type="number">
+            </label>
+            <button type="button" class="bg-gray-300 px-4 py-2 cursor-pointer rounded mr-2 hover:scale-110 duration-300 ease-in-out" (click)="closeUpdateModal()">Cancelar</button>
+            <button id="updateButton" type="button" class="bg-blue-600 text-white px-4 py-2 cursor-pointer rounded hover:scale-110 duration-300 ease-in-out"
+            (click)="updateUser()">Actualizar</button>
+          </form>
+          </div>
 </dialog>
